@@ -1,48 +1,55 @@
-# 🤖 AI Chat — Local LLM Chatbot for Android
+AI Chat — Local LLM Chatbot for Android
+========================================
 
-An **on-device AI chatbot** for Android, powered by [llama.cpp](https://github.com/ggerganov/llama.cpp). Run Large Language Models (LLMs) **completely offline** on your Android device — no internet, no cloud, no API key required.
+An on-device AI chatbot for Android, powered by [llama.cpp](https://github.com/ggerganov/llama.cpp). Run Large Language Models (LLMs) completely offline on your Android device — no internet, no cloud, no API key required.
 
-> Minimum Android: **API 33 (Android 13)**  
-> Supported ABIs: `arm64-v8a`, `x86_64`
-
----
-
-## ✨ Features
-
-- 💬 **Real-time streaming** — tokens appear as they are generated
-- 🔒 **100% Offline** — no internet connection required after setup
-- 📦 **Any GGUF model** — load any compatible GGUF model from your device storage
-- ⚡ **Optimized for Arm** — uses KleidiAI kernels on arm64-v8a for best performance
-- 🔄 **Context shifting** — handles long conversations without running out of memory
-- 📋 **GGUF metadata viewer** — inspect model info before loading
+- Minimum Android: API 33 (Android 13)
+- Supported ABIs: `arm64-v8a`, `x86_64`
 
 ---
 
-## 📱 Screenshots
+Screenshots
+-----------
 
-> *Load a GGUF model from your storage, then start chatting instantly.*
+<p align="center">
+  <img src="screenshots/demo.png" width="320" alt="AI Chat demo screenshot"/>
+</p>
 
 ---
 
-## 🏗 Architecture
+Features
+--------
+
+- Real-time streaming — tokens appear as they are generated
+- 100% Offline — no internet connection required after setup
+- Any GGUF model — load any compatible GGUF model from your device storage
+- Optimized for Arm — uses KleidiAI kernels on arm64-v8a for best performance
+- Context shifting — handles long conversations without running out of memory
+- GGUF metadata viewer — inspect model info before loading
+
+---
+
+Architecture
+------------
 
 ```
 llama.android/
-├── app/          ← Android UI (Kotlin, Views)
+├── app/          <- Android UI (Kotlin, Views)
 │   └── MainActivity, MessageAdapter
-└── lib/          ← JNI bridge + Kotlin API
+└── lib/          <- JNI bridge + Kotlin API
     ├── cpp/
-    │   ├── ai_chat.cpp   ← JNI layer wrapping llama.cpp
+    │   ├── ai_chat.cpp   <- JNI layer wrapping llama.cpp
     │   └── CMakeLists.txt
     └── java/com/arm/aichat/
-        ├── AiChat.kt            ← Public entry point
-        ├── InferenceEngine.kt   ← Interface
-        └── internal/            ← Implementation detail
+        ├── AiChat.kt            <- Public entry point
+        ├── InferenceEngine.kt   <- Interface
+        └── internal/            <- Implementation detail
 ```
 
 ---
 
-## 🚀 Getting Started
+Getting Started
+---------------
 
 ### Requirements
 
@@ -57,8 +64,8 @@ llama.android/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+git clone https://github.com/venerdidnp/diet-planner-ai-android.git
+cd diet-planner-ai-android
 
 # Initialize llama.cpp submodule (required for build!)
 git submodule update --init --recursive
@@ -66,8 +73,8 @@ git submodule update --init --recursive
 
 ### 2. Open in Android Studio
 
-1. Open **Android Studio**
-2. Click **File → Open** and select this folder
+1. Open Android Studio
+2. Click File > Open and select this folder
 3. Wait for Gradle sync to complete
 4. Android Studio will automatically detect the NDK
 
@@ -82,7 +89,7 @@ You need a `.gguf` model file on your Android device. Recommended models for mob
 | Llama 3.2 1B (Q4) | ~700 MB | [HuggingFace](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct-GGUF) |
 | Phi-3.5 Mini (Q4) | ~2.2 GB | [HuggingFace](https://huggingface.co/microsoft/Phi-3.5-mini-instruct-gguf) |
 
-> ⚠️ Make sure your device has enough RAM. A 1B model needs ~1 GB free RAM minimum.
+> Make sure your device has enough RAM. A 1B model needs ~1 GB free RAM minimum.
 
 Transfer the `.gguf` file to your phone (via USB, Google Drive, etc.).
 
@@ -96,18 +103,19 @@ Transfer the `.gguf` file to your phone (via USB, Google Drive, etc.).
 ./gradlew assembleRelease
 ```
 
-Or just hit **Run ▶️** in Android Studio.
+Or just hit Run in Android Studio.
 
 ### 5. Using the App
 
-1. Tap the **FAB (floating action button)** to open file picker
+1. Tap the FAB (floating action button) to open file picker
 2. Select your `.gguf` model file
 3. Wait for the model to load (first time may copy the file to app storage)
-4. Type your message and tap **Send**
+4. Type your message and tap Send
 
 ---
 
-## 🔧 Configuration
+Configuration
+-------------
 
 Key parameters in [`ai_chat.cpp`](lib/src/main/cpp/ai_chat.cpp):
 
@@ -120,9 +128,10 @@ Key parameters in [`ai_chat.cpp`](lib/src/main/cpp/ai_chat.cpp):
 
 ---
 
-## 🛠 Building llama.cpp (submodule)
+Building llama.cpp (submodule)
+-------------------------------
 
-This project uses llama.cpp as a **git submodule**. The submodule is located at `llama.cpp/` in the project root.
+This project uses llama.cpp as a git submodule located at `llama.cpp/` in the project root.
 
 If you modify llama.cpp or want to update to a newer version:
 
@@ -140,13 +149,15 @@ git commit -m "chore: update llama.cpp to b5263"
 
 ---
 
-## 🤝 Contributing
+Contributing
+------------
 
-Pull requests are welcome! For major changes, please open an issue first.
+Pull requests are welcome. For major changes, please open an issue first.
 
 ---
 
-## 📄 License
+License
+-------
 
-This project is licensed under the **MIT License**.  
+This project is licensed under the MIT License.
 The bundled [llama.cpp](https://github.com/ggerganov/llama.cpp) library is also MIT-licensed.
